@@ -25,6 +25,9 @@ angular
       .when('/', {
         templateUrl: 'scripts/main/main.html',
         controller: 'MainCtrl'
+      }).when('/bookSearch', {
+        templateUrl: 'scripts/googleBook/bookSearch.html',
+        controller: 'BookSearchCtrl'
       })
       .otherwise({
         redirectTo: '/'

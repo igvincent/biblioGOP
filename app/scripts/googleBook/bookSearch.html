@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="input-group">
+    <input type="text" class="form-control" placeholder="ISBN number" ng-model="isbnId">
+      <span class="input-group-btn">
+        <button class="btn btn-primary" ng-click="search(isbnId)">Search</button>
+      </span>
+  </div>
+  <br>
+  <div class="panel panel-default" ng-show="book.title">
+    <div class="panel-heading">{{book.title}}</div>
+    <ul class="list-group">
+      <li class="list-group-item" ng-show="book.authors"><b>Author(s) : </b><span ng-repeat="author in book.authors">{{author}}</span> &nbsp;</li>
+      <li class="list-group-item" ng-show="book.publisher"><b>Publisher : </b>{{book.publisher}}</li>
+      <li class="list-group-item" ng-show="book.description"><b>Description : </b>{{book.description}}</li>
+      <li class="list-group-item" ng-show="book.pageCount"><b>PageCount : </b>{{book.pageCount}}</li>
+    </ul>
+  </div>
+
+</div>
