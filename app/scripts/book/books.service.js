@@ -9,9 +9,9 @@
  */
 
 angular.module('biblioGopApp')
-  .factory('Books', function($firebase, FIREBASE_URL) {
+  .factory('Books', function($firebaseArray, FIREBASE_URL) {
   var ref = new Firebase(FIREBASE_URL);
-  var books = $firebase(ref.child('books')).$asArray();
+  var books = $firebaseArray(ref);;
   var Book = {
     all: function () {
       return books;
@@ -19,11 +19,8 @@ angular.module('biblioGopApp')
     create: function (book) {
       return books.$add(book);
     },
-    get: function (bookId) {
-      return $firebase(ref.child('books').child(bookId)).$asObject();
-    },
-    update: function (bookId, book) {
-        return ref.child('books').child(bookId).set(book);
+    update: function (book) {
+        return books.$save(book);
     },
     delete: function (book) {
       return books.$remove(book);

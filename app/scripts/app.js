@@ -28,6 +28,9 @@ angular
       }).when('/bookSearch', {
         templateUrl: 'scripts/googleBook/bookSearch.html',
         controller: 'BookSearchCtrl'
+      }).when('/books', {
+        templateUrl: 'scripts/book/books.html',
+        controller: 'BooksCtrl'
       })
       .otherwise({
         redirectTo: '/'
