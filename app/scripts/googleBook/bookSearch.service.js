@@ -25,7 +25,7 @@ angular.module('biblioGopApp')
               description : data.items[0].volumeInfo.description,
               pageCount : data.items[0].volumeInfo.pageCount,
               borrow : false,
-              since : null,
+              since : new Date(),
               borrower : null
             };
           }
