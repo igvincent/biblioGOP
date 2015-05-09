@@ -9,11 +9,25 @@
  */
 angular.module('biblioGopApp')
   .controller('BooksCtrl', function ($scope, Books) {
-        $scope.books = Books.all();
 
-        $scope.delBook = function(book){
-          Books.delete(book);
-        }
+    $scope.books = Books.all();
+
+    $scope.delBook = function(book){
+      Books.delete(book);
+    };
+
+    $scope.borrowBook = function(book){
+        book.borrow = true;
+        book.since = new Date().toLocaleDateString();
+        Books.update(book);
+    };
+
+    $scope.returnBook = function(book){
+      book.borrower = null;
+      book.borrow = false;
+      book.since = new Date().toLocaleDateString();
+      Books.update(book);
+    }
 
 
   });
