@@ -16,17 +16,19 @@ angular.module('biblioGopApp')
       Books.delete(book);
     };
 
-    $scope.borrowBook = function(book){
+    $scope.borrowBook = function(e,book){
+      if(e.keyCode == 13){
         book.borrow = true;
         book.since = new Date().toLocaleDateString();
         Books.update(book);
+      }
     };
 
     $scope.returnBook = function(book){
-      book.borrower = null;
-      book.borrow = false;
-      book.since = new Date().toLocaleDateString();
-      Books.update(book);
+        book.borrower = null;
+        book.borrow = false;
+        book.since = new Date().toLocaleDateString();
+        Books.update(book);
     }
 
 

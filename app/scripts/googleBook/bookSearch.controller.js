@@ -12,8 +12,8 @@ angular.module('biblioGopApp')
         $scope.isbnId = null;
         $scope.book = [];
 
-        $scope.search = function(isbnId){
-          if(isbnId){
+        $scope.search = function(e,isbnId){
+          if(isbnId && e.keyCode == 13){
             $scope.book = {};
             $scope.book = BookSearch.get({ISBN : isbnId});
           }

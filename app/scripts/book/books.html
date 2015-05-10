@@ -11,9 +11,8 @@
         <li class="list-group-item" ng-show="!book.borrower"><b>Available : </b> since {{book.since}}</li>
         <li class="list-group-item">
           <div class="input-group">
-            <input ng-disabled="book.borrow" type="text" class="form-control" placeholder="Borrower username" ng-model="book.borrower">
+            <input ng-disabled="book.borrow" type="text" ng-keydown="borrowBook($event,book)" class="form-control" placeholder="Borrower username" ng-model="book.borrower">
             <span class="input-group-btn">
-              <button ng-show="!book.borrow && book.borrower" class="btn btn-primary" ng-click="borrowBook(book)">Borrow</button>
               <button ng-show="book.borrow" class="btn btn-primary" ng-click="returnBook(book)">Return book</button>
               <button ng-click="delBook(book)" class="btn btn-danger">Delete this book</button>
             </span>

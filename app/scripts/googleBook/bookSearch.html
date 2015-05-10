@@ -1,10 +1,5 @@
 <div class="container">
-  <div class="input-group">
-    <input type="text" class="form-control" placeholder="ISBN number" ng-model="isbnId">
-      <span class="input-group-btn">
-        <button class="btn btn-primary" ng-click="search(isbnId)">Search</button>
-      </span>
-  </div>
+    <input type="text" class="form-control" ng-keydown="search($event,isbnId)" placeholder="ISBN number" ng-model="isbnId">
   <br>
   <div class="panel panel-default" ng-show="book.title">
     <div class="panel-heading">{{book.title}}</div>
