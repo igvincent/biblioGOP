@@ -1,7 +1,9 @@
 <div class="container">
   <div ng-repeat="book in books">
     <div class="panel" ng-class="{'panel-success': !book.borrow, 'panel-danger': book.borrow}">
-      <div class="panel-heading">{{book.title}}</div>
+      <div class="panel-heading">{{book.title}}
+        <a ng-click="delBook(book)" class="pull-right"><i class="glyphicon glyphicon-remove"></i> </a>
+      </div>
       <ul class="list-group">
         <li class="list-group-item" ng-show="book.authors"><b>Author(s) : </b><span ng-repeat="author in book.authors">{{author}}</span> &nbsp;</li>
         <li class="list-group-item" ng-show="book.publisher"><b>Publisher : </b>{{book.publisher}}</li>
@@ -12,11 +14,10 @@
         <li class="list-group-item" ng-show="book.borrower"><b>Borrower : </b>{{book.borrower}} since {{book.since}}</li>
         <li class="list-group-item" ng-show="!book.borrower"><b>Available : </b> since {{book.since}}</li>
         <li class="list-group-item">
-          <div class="input-group">
+          <div ng-class="{'input-group': book.borrow}">
             <input ng-disabled="book.borrow" type="text" ng-keydown="borrowBook($event,book)" class="form-control" placeholder="Borrower username" ng-model="book.borrower">
             <span class="input-group-btn">
               <button ng-show="book.borrow" class="btn btn-primary" ng-click="returnBook(book)">Return book</button>
-              <button ng-click="delBook(book)" class="btn btn-danger">Delete this book</button>
             </span>
           </div>
            </li>
