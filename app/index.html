@@ -8,6 +8,9 @@
   <!--  assets/styles/main.css -->
   <link rel="stylesheet" href="assets/styles/main.css">
   <!-- endbuild -->
+  <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/material-fullpalette.css">
+  <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/ripples.css">
+  <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/roboto.min.css">
 </head>
 <body ng-app="biblioGopApp">
 <!--[if lt IE 7]>
@@ -37,6 +40,8 @@
 <script type="text/javascript" src="bower_components/angular-touch/angular-touch.js"></script>
 <script type="text/javascript" src="bower_components/firebase/firebase.js"></script>
 <script type="text/javascript" src="bower_components/angularfire/dist/angularfire.min.js"></script>
+<script type="text/javascript" src="bower_components/bootstrap-material-design/dist/js/material.min.js"></script>
+<script type="text/javascript" src="bower_components/bootstrap-material-design/dist/js/ripples.min.js"></script>
 <!-- endbower -->
 
 <!-- script-->
@@ -48,6 +53,11 @@
 <script type="text/javascript" src="scripts/googleBook/bookSearch.service.js"></script>
 <script type="text/javascript" src="scripts/googleBook/bookSearch.controller.js"></script>
 <script type="text/javascript" src="scripts/utils/readMore.directive.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $.material.init();
+  });
+</script>
 <script src="//localhost:35729/livereload.js"></script>
 <!-- endscript -->
 </body>
