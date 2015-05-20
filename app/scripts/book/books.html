@@ -18,6 +18,7 @@
         <li class="list-group-item" ng-show="book.borrower"><b>Borrower : </b>{{book.borrower}} since {{book.since}}</li>
         <li class="list-group-item" ng-show="!book.borrower"><b>Available : </b> since {{book.since}}</li>
         <hr ng-if="book.comments">
+        <li class="list-group-item"><b>Comments :</b></li>
         <li class="list-group-item" ng-repeat="comment in book.comments">
           <b>{{comment.username}}</b> - {{comment.body}}
         </li>

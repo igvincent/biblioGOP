@@ -52,6 +52,7 @@ angular.module('biblioGopApp')
     $scope.addComment = function(e,book){
       if(e.keyCode == 13) {
         if(book.newComment.username && book.newComment.body) {
+          var peopleWhoComment = book.newComment.username;
           if(book.comments){
             book.comments.push(book.newComment);
             book.newComment = null;
@@ -63,15 +64,11 @@ angular.module('biblioGopApp')
           }
           Books.update(book)
             .then(function(){
-              ngNotify.set("Thanks " + book.borrower + " for comment !", {type:'success'});
+              ngNotify.set("Thanks " + peopleWhoComment + " for comment !", {type:'success'});
             }).catch(function(){
-              ngNotify.set("Error " + book.borrower + " !", {type:'warning'});
+              ngNotify.set("Error " + peopleWhoComment + " !", {type:'warning'});
             });
         }
       }
     }
-
-
-
-
   });
