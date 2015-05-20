@@ -10,6 +10,8 @@
 angular.module('biblioGopApp')
   .controller('BooksCtrl', function ($scope, Books, ngNotify) {
     $scope.books = Books.all();
+    $scope.showAddComment = false;
+    $scope.bookYouCanComment = [];
 
     $scope.delBook = function(book){
       Books.delete(book).then(function(){
@@ -32,8 +34,14 @@ angular.module('biblioGopApp')
       }
     };
 
+    $scope.showAddComment = function(book){
+      console.log(book.$id);
+      return !($scope.bookYouCanComment.indexOf(book) == -1);
+    };
+
     $scope.returnBook = function(book){
       var notify = book.borrower;
+
       book.borrower = null;
       book.borrow = false;
       book.since = new Date().toLocaleDateString();
@@ -41,12 +49,10 @@ angular.module('biblioGopApp')
 
       Books.update(book).then(function(){
         ngNotify.set("Please " + notify + " comment your book!", {type:'success'});
-        $scope.showAddComment = true;
+        $scope.bookYouCanComment.push(book);
       }).catch(function(){
         ngNotify.set("Error " + notify + " !", {type:'warning'});
       });
-
-
     };
 
     $scope.addComment = function(e,book){
@@ -56,7 +62,6 @@ angular.module('biblioGopApp')
           if(book.comments){
             book.comments.push(book.newComment);
             book.newComment = null;
-
           }else {
             book.comments = [];
             book.comments.push(book.newComment);
@@ -65,6 +70,7 @@ angular.module('biblioGopApp')
           Books.update(book)
             .then(function(){
               ngNotify.set("Thanks " + peopleWhoComment + " for comment !", {type:'success'});
+              $scope.bookYouCanComment.splice(book);
             }).catch(function(){
               ngNotify.set("Error " + peopleWhoComment + " !", {type:'warning'});
             });
