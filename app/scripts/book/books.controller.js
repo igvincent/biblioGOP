@@ -35,7 +35,6 @@ angular.module('biblioGopApp')
     };
 
     $scope.showAddComment = function(book){
-      console.log(book.$id);
       return !($scope.bookYouCanComment.indexOf(book) == -1);
     };
 

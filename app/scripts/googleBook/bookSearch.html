@@ -1,15 +1,31 @@
 <div class="container">
-    <input type="text" class="form-control" ng-keydown="search($event,isbnId)" placeholder="ISBN number" ng-model="isbnId">
+  <input type="text" class="form-control" ng-keydown="search($event,isbnId)" placeholder="ISBN number" ng-model="isbnId">
   <br>
   <div class="panel panel-default" ng-show="book.title">
     <div class="panel-heading">{{book.title}}</div>
     <ul class="list-group">
-      <li class="list-group-item" ng-show="book.authors"><b>Author(s) : </b><span ng-repeat="author in book.authors">{{author}}</span> &nbsp;</li>
-      <li class="list-group-item" ng-show="book.publisher"><b>Publisher : </b>{{book.publisher}}</li>
-      <li class="list-group-item" ng-show="book.description"><b>Description : </b>{{book.description}}</li>
-      <li class="list-group-item" ng-show="book.pageCount"><b>PageCount : </b>{{book.pageCount}}</li>
-      <li class="list-group-item"><button ng-click="addBook(book)" class="btn btn-primary">Add this book</button></li>
+      <li class="list-group-item"
+          ng-show="book.authors">
+        <b>Author(s) : </b>
+        <span ng-repeat="author in book.authors">{{author}}</span> &nbsp;
+      </li>
+      <li class="list-group-item"
+          ng-show="book.publisher">
+        <b>Publisher : </b>
+        {{book.publisher}}
+      </li>
+      <li class="list-group-item"
+          ng-show="book.description">
+        <b>Description : </b>
+        {{book.description}}
+      </li>
+      <li class="list-group-item"
+          ng-show="book.pageCount">
+        <b>PageCount : </b>{{book.pageCount}}
+      </li>
+      <li class="list-group-item">
+        <button ng-click="addBook(book)" class="btn btn-primary">Add this book</button>
+      </li>
     </ul>
   </div>
-
 </div>

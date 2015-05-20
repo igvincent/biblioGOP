@@ -37,4 +37,3 @@ angular
         redirectTo: '/'
       });
   }).constant('FIREBASE_URL','http://bibliogop.firebaseIO.com/books');
-
