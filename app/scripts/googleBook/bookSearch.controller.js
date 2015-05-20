@@ -8,7 +8,7 @@
  * Controller of the biblioGopApp
  */
 angular.module('biblioGopApp')
-  .controller('BookSearchCtrl', function ($scope, Books, BookSearch) {
+  .controller('BookSearchCtrl', function ($scope, Books, BookSearch, ngNotify) {
         $scope.isbnId = null;
         $scope.book = [];
 
@@ -20,6 +20,10 @@ angular.module('biblioGopApp')
         };
 
         $scope.addBook = function(book){
-          Books.create(book);
+          Books.create(book).then(function(){
+            ngNotify.set("Thanks for help  !", {type:'success'});
+          }).catch(function(){
+            ngNotify.set("Error !", {type:'warning'});
+          });
         }
   });

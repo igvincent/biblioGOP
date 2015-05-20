@@ -26,7 +26,9 @@ angular.module('biblioGopApp')
               pageCount : data.items[0].volumeInfo.pageCount,
               borrow : false,
               since : new Date().toLocaleDateString(),
-              borrower : null
+              borrower : null,
+              comments : [],
+              count: 0
             };
           }
           return response;

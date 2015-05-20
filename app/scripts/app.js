@@ -18,7 +18,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'firebase'
+    'firebase',
+    'ngNotify'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -36,5 +37,4 @@ angular
         redirectTo: '/'
       });
   }).constant('FIREBASE_URL','http://bibliogop.firebaseIO.com/books');
-
 

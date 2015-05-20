@@ -11,7 +11,7 @@
 angular.module('biblioGopApp')
   .factory('Books', function($firebaseArray, FIREBASE_URL) {
   var ref = new Firebase(FIREBASE_URL);
-  var books = $firebaseArray(ref);;
+  var books = $firebaseArray(ref);
   var Book = {
     all: function () {
       return books;
