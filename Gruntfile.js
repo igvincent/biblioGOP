@@ -49,10 +49,16 @@ module.exports = function (grunt) {
           base: 'app/'
         }
       }
+    },
+    karma: {
+      unit: {
+        configFile: 'test/karma.conf.js'
+      }
     }
   });
 
   grunt.registerTask('default', ['compass']);
   grunt.registerTask('reloading', ['watch']);
   grunt.registerTask('server', ['connect', 'watch']);
+  grunt.registerTask('test', ['karma']);
 };
