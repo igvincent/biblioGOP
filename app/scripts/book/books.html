@@ -70,18 +70,16 @@
                      ng-model="book.newComment.body">
             </li>
             <li class="list-group-item">
-              <div>
                 <input ng-disabled="book.borrow"
                        type="text"
-                       ng-show="!(showAddComment(book))"
+                       ng-show="!(showAddComment(book)) && !book.borrow"
                        ng-keydown="borrowBook($event,book)"
                        class="form-control"
                        placeholder="Borrower username"
                        ng-model="book.borrower">
                 <button ng-show="book.borrow"
-                        class="btn btn-primary"
+                        class="pull-right btn btn-primary"
                         ng-click="returnBook(book)">Return book</button>
-              </div>
             </li>
           </ul>
       </div>
