@@ -24,6 +24,7 @@ angular.module('biblioGopApp')
               publisher : data.items[0].volumeInfo.publisher,
               description : data.items[0].volumeInfo.description,
               pageCount : data.items[0].volumeInfo.pageCount,
+              thumbnail: data.items[0].volumeInfo.imageLinks.thumbnail,
               borrow : false,
               since : new Date().toLocaleDateString(),
               borrower : null,

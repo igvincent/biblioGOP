@@ -7,74 +7,80 @@
         </a>
         <h3 class="panel-title">{{book.title}}</h3>
       </div>
-      <br>
-      <ul class="list-group">
-        <li class="list-group-item"
-            ng-show="book.authors">
-          <b>Author(s) : </b><span ng-repeat="author in book.authors">{{author}}</span> &nbsp;
-        </li>
-        <li class="list-group-item"
-            ng-show="book.publisher">
-          <b>Publisher : </b>
-          {{book.publisher}}
-        </li>
-        <li class="list-group-item"
-            ng-show="book.description">
-          <b>Description : </b>
-          <div read-more hmtext="{{ book.description }}" hmlimit="100" hm-more-text="read more" hm-less-text="read less"></div>
-        </li>
-        <li class="list-group-item"
-            ng-show="book.pageCount">
-          <b>PageCount : </b>{{book.pageCount}}
-        </li>
-        <li class="list-group-item"
-            ng-show="book.borrower">
-          <b>Borrower : </b>{{book.borrower}} since {{book.since}}
-        </li>
-        <li class="list-group-item"
-            ng-show="!book.borrower">
-          <b>Available : </b> since {{book.since}}
-        </li>
-        <hr ng-if="book.comments">
-        <li class="list-group-item"
-            ng-if="book.comments">
-          <b>Comments :</b>
-        </li>
-        <li class="list-group-item"
-            ng-if="book.comments"
-            ng-repeat="comment in book.comments">
-          <b>{{comment.username}}</b> - {{comment.body}}
-        </li>
-        <hr ng-if="showAddComment(book)">
-        <li class="list-group-item" ng-show="showAddComment(book)">
-          <b>Add a comment</b>
-          <input type="text"
-                 ng-keydown="addComment($event,book)"
-                 class="form-control"
-                 placeholder="Username"
-                 ng-model="book.newComment.username">
-          <input type="text"
-                 ng-keydown="addComment($event,book)"
-                 class="form-control"
-                 placeholder="Comment"
-                 ng-model="book.newComment.body">
-        </li>
-        <hr>
-        <li class="list-group-item">
-          <div>
-            <input ng-disabled="book.borrow"
-                   type="text"
-                   ng-keydown="borrowBook($event,book)"
-                   class="form-control"
-                   placeholder="Borrower username"
-                   ng-model="book.borrower">
-            <button ng-show="book.borrow"
-                    class="btn btn-primary"
-                    ng-click="returnBook(book)">Return book</button>
+      <div class="panel-body">
+          <div class="media-left">
+            <img class="media-object" ng-src="{{book.thumbnail}}" alt="{{::book.title}} image">
           </div>
-          <br ng-show="!book.borrow">
-        </li>
-      </ul>
+          <div class="media-body">
+              <ul class="list-group">
+                  <li class="list-group-item"
+                      ng-show="book.authors">
+                      <b>Author(s) : </b><span ng-repeat="author in book.authors">{{author}}</span> &nbsp;
+                  </li>
+                  <li class="list-group-item"
+                      ng-show="book.publisher">
+                      <b>Publisher : </b>
+                      {{book.publisher}}
+                  </li>
+                  <li class="list-group-item"
+                      ng-show="book.description">
+                      <b>Description : </b>
+                      <span read-more hmtext="{{book.description}}"></span>
+                  </li>
+                  <li class="list-group-item"
+                      ng-show="book.pageCount">
+                      <b>PageCount : </b>{{book.pageCount}}
+                  </li>
+                  <li class="list-group-item"
+                      ng-show="book.borrower">
+                      <b>Borrower : </b>{{book.borrower}} since {{book.since}}
+                  </li>
+                  <li class="list-group-item"
+                      ng-show="!book.borrower">
+                      <b>Available : </b> since {{book.since}}
+                  </li>
+                  <hr ng-if="book.comments">
+                  <li class="list-group-item"
+                      ng-if="book.comments">
+                      <b>Comments :</b>
+                  </li>
+                  <li class="list-group-item"
+                      ng-if="book.comments"
+                      ng-repeat="comment in book.comments">
+                      <b>{{comment.username}}</b> - {{comment.body}}
+                  </li>
+                  <hr ng-if="showAddComment(book)">
+                  <li class="list-group-item" ng-show="showAddComment(book)">
+                      <b>Add a comment</b>
+                      <input type="text"
+                             ng-keydown="addComment($event,book)"
+                             class="form-control"
+                             placeholder="Username"
+                             ng-model="book.newComment.username">
+                      <input type="text"
+                             ng-keydown="addComment($event,book)"
+                             class="form-control"
+                             placeholder="Comment"
+                             ng-model="book.newComment.body">
+                  </li>
+                  <hr>
+                  <li class="list-group-item">
+                      <div>
+                          <input ng-disabled="book.borrow"
+                                 type="text"
+                                 ng-keydown="borrowBook($event,book)"
+                                 class="form-control"
+                                 placeholder="Borrower username"
+                                 ng-model="book.borrower">
+                          <button ng-show="book.borrow"
+                                  class="btn btn-primary"
+                                  ng-click="returnBook(book)">Return book</button>
+                      </div>
+                      <br ng-show="!book.borrow">
+                  </li>
+              </ul>
+          </div>
+      </div>
     </div>
   </div>
 </div>
