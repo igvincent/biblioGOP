@@ -1,5 +1,5 @@
 <div class="container">
-  <div ng-repeat="book in books">
+  <div ng-repeat="book in books" ng-init="showComments == false">
     <div class="panel" ng-class="{'panel-success': !book.borrow, 'panel-danger': book.borrow}">
       <div class="panel-heading">
         <a ng-click="delBook(book)" class="pull-right">
@@ -39,47 +39,51 @@
                       ng-show="!book.borrower">
                       <b>Available : </b> since {{book.since}}
                   </li>
-                  <hr ng-if="book.comments">
-                  <li class="list-group-item"
-                      ng-if="book.comments">
-                      <b>Comments :</b>
-                  </li>
-                  <li class="list-group-item"
-                      ng-if="book.comments"
-                      ng-repeat="comment in book.comments">
-                      <b>{{comment.username}}</b> - {{comment.body}}
-                  </li>
-                  <hr ng-if="showAddComment(book)">
-                  <li class="list-group-item" ng-show="showAddComment(book)">
-                      <b>Add a comment</b>
-                      <input type="text"
-                             ng-keydown="addComment($event,book)"
-                             class="form-control"
-                             placeholder="Username"
-                             ng-model="book.newComment.username">
-                      <input type="text"
-                             ng-keydown="addComment($event,book)"
-                             class="form-control"
-                             placeholder="Comment"
-                             ng-model="book.newComment.body">
-                  </li>
-                  <hr>
-                  <li class="list-group-item">
-                      <div>
-                          <input ng-disabled="book.borrow"
-                                 type="text"
-                                 ng-keydown="borrowBook($event,book)"
-                                 class="form-control"
-                                 placeholder="Borrower username"
-                                 ng-model="book.borrower">
-                          <button ng-show="book.borrow"
-                                  class="btn btn-primary"
-                                  ng-click="returnBook(book)">Return book</button>
-                      </div>
-                      <br ng-show="!book.borrow">
-                  </li>
               </ul>
           </div>
+          <ul class="list-group">
+            <li class="list-group-item" ng-show="book.comments">
+              <hr>
+              <h5 ng-click="showComments =!showComments">
+                <span ng-show="!showComments">Show</span>
+                <span ng-show="showComments">Hide</span>
+                comments</h5>
+
+            </li>
+            <li class="list-group-item"
+                ng-show="book.comments && showComments"
+                ng-repeat="comment in book.comments">
+              <b>{{comment.username}}</b> - {{comment.body}}
+            </li>
+
+            <li class="list-group-item" ng-show="showAddComment(book)">
+              <b>Add a comment</b>
+              <input type="text"
+                     ng-keydown="addComment($event,book)"
+                     class="form-control"
+                     placeholder="Username"
+                     ng-model="book.newComment.username">
+              <input type="text"
+                     ng-keydown="addComment($event,book)"
+                     class="form-control"
+                     placeholder="Comment"
+                     ng-model="book.newComment.body">
+            </li>
+            <li class="list-group-item">
+              <div>
+                <input ng-disabled="book.borrow"
+                       type="text"
+                       ng-show="!(showAddComment(book))"
+                       ng-keydown="borrowBook($event,book)"
+                       class="form-control"
+                       placeholder="Borrower username"
+                       ng-model="book.borrower">
+                <button ng-show="book.borrow"
+                        class="btn btn-primary"
+                        ng-click="returnBook(book)">Return book</button>
+              </div>
+            </li>
+          </ul>
       </div>
     </div>
   </div>
