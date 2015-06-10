@@ -8,12 +8,12 @@
  * Controller of the biblioGopApp
  */
 angular.module('biblioGopApp')
-  .controller('BookSearchCtrl', function ($scope, Books, BookSearch, ngNotify) {
+  .controller('BookSearchCtrl', function ($scope, Books, BookSearch, Snackbar) {
         $scope.isbnId = null;
         $scope.book = [];
 
         $scope.search = function(e,isbnId){
-          if(isbnId && e.keyCode == 13){
+          if(isbnId && e.keyCode === 13){
             $scope.book = {};
             $scope.book = BookSearch.get({ISBN : isbnId});
           }
@@ -21,9 +21,9 @@ angular.module('biblioGopApp')
 
         $scope.addBook = function(book){
           Books.create(book).then(function(){
-            ngNotify.set("Thanks for help  !", {type:'success'});
+            Snackbar.create('Thanks for help  !');
           }).catch(function(){
-            ngNotify.set("Error !", {type:'warning'});
+            Snackbar.create('Error !');
           });
-        }
+        };
   });

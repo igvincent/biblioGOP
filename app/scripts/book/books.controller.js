@@ -8,28 +8,28 @@
  * Controller of the biblioGopApp
  */
 angular.module('biblioGopApp')
-  .controller('BooksCtrl', function ($scope, Books, ngNotify) {
+  .controller('BooksCtrl', function ($scope, Books, Snackbar) {
     $scope.books = Books.all();
     $scope.showAddComment = false;
     $scope.bookYouCanComment = [];
 
     $scope.delBook = function(book){
       Books.delete(book).then(function(){
-        ngNotify.set("I'm sorry for this book !", {type:'success'});
+        Snackbar.create('I\'m sorry for this book !');
       }).catch(function(){
-        ngNotify.set("Error !", {type:'warning'});
+        Snackbar.create('Error !');
       });
     };
 
     $scope.borrowBook = function(e,book){
-      if(e.keyCode == 13){
+      if(e.keyCode === 13){
         book.borrow = true;
         book.since = new Date().toLocaleDateString();
         Books.update(book)
           .then(function(){
-            ngNotify.set("Thanks " + book.borrower + " !", {type:'success'});
+            Snackbar.create('Thanks ' + book.borrower + ' !');
           }).catch(function(){
-            ngNotify.set("Error " + book.borrower + " !", {type:'warning'});
+            Snackbar.create('Error ' + book.borrower + ' !');
           });
       }
     };
@@ -47,15 +47,15 @@ angular.module('biblioGopApp')
       book.count += 1;
 
       Books.update(book).then(function(){
-        ngNotify.set("Please " + notify + " comment your book!", {type:'success'});
+        Snackbar.create('Please ' + notify + ' comment your book!');
         $scope.bookYouCanComment.push(book);
       }).catch(function(){
-        ngNotify.set("Error " + notify + " !", {type:'warning'});
+        Snackbar.create('Error ' + notify + ' !');
       });
     };
 
     $scope.addComment = function(e,book){
-      if(e.keyCode == 13) {
+      if(e.keyCode === 13) {
         if(book.newComment.username && book.newComment.body) {
           var peopleWhoComment = book.newComment.username;
           if(book.comments){
@@ -68,12 +68,12 @@ angular.module('biblioGopApp')
           }
           Books.update(book)
             .then(function(){
-              ngNotify.set("Thanks " + peopleWhoComment + " for comment !", {type:'success'});
+              Snackbar.create('Thanks ' + peopleWhoComment + ' for comment !');
               $scope.bookYouCanComment.splice(book);
             }).catch(function(){
-              ngNotify.set("Error " + peopleWhoComment + " !", {type:'warning'});
+              Snackbar.create('Error ' + peopleWhoComment + ' !');
             });
         }
       }
-    }
+    };
   });
