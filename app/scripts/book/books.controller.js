@@ -21,38 +21,30 @@ angular.module('biblioGopApp')
       });
     };
 
-    $scope.borrowBook = function (e, book,name) {
+    $scope.borrowBook = function (e, book, name) {
       if (e.keyCode === 13) {
         book.borrow = true;
+        var borrower = {
+          name: name,
+          date: new Date().toLocaleDateString()
+        };
 
-        if (book.borrowers) {
-          book.borrowers.push({
-            name: name,
-            date: new Date().toLocaleDateString()
-          });
-          book.newComment = null;
-        } else {
-          book.borrowers = [];
-          book.borrowers.push({
-            name: name,
-            date: new Date().toLocaleDateString()
-          });
-          book.newComment = null;
-        }
+        if (!book.borrowers) book.borrowers = [];
+        book.borrowers.push(borrower);
+        book.newComment = null;
 
         Books.update(book)
           .then(function () {
             Snackbar.create('Thanks ' + name + ' !');
-            book.newComment = null;
           }).catch(function () {
             Snackbar.create('Error ' + name + ' !');
-            book.newComment = null;
           });
       }
     };
 
-    $scope.returnBorrower=  function(book){
-      return book.borrowers.slice(-1)[0];
+    $scope.returnBorrower = function (book) {
+      if(book.borrowers) return book.borrowers.slice(-1)[0];
+      else return {name: '', date: book.since};
     };
 
     $scope.showAddComment = function (book) {
@@ -79,18 +71,15 @@ angular.module('biblioGopApp')
       if (e.keyCode === 13) {
         if (book.newComment.body) {
           var username = book.borrowers.slice(-1)[0].name;
+
           var comment = {
             username: username,
+            date: new Date().toLocaleDateString(),
             body: book.newComment.body
           };
 
-          if (book.comments) {
-            book.comments.push(comment);
-          } else {
-            book.comments = [];
-            book.comments.push(comment);
-          }
-
+          if (!book.comments) book.comments = [];
+          book.comments.push(comment);
           book.newComment = null;
 
           Books.update(book)

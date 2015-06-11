@@ -12,7 +12,8 @@ angular.module('biblioGopApp')
   .factory('Books', function($firebaseArray, FIREBASE_URL) {
   var ref = new Firebase(FIREBASE_URL);
   var books = $firebaseArray(ref);
-  var Book = {
+
+    return {
     all: function () {
       return books;
     },
@@ -20,11 +21,10 @@ angular.module('biblioGopApp')
       return books.$add(book);
     },
     update: function (book) {
-        return books.$save(book);
+      return books.$save(book);
     },
     delete: function (book) {
       return books.$remove(book);
     }
   };
-  return Book;
 });

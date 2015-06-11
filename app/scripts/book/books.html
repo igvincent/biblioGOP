@@ -48,13 +48,14 @@
                 <span ng-show="!showComments">Show</span>
                 <span ng-show="showComments">Hide</span>
                 comments</h5>
-
+              <hr>
             </li>
             <li class="list-group-item"
                 ng-show="book.comments && showComments"
                 ng-repeat="comment in book.comments">
-              <b>{{::comment.username}}</b> - {{::comment.body}}
+              <b>{{::comment.username}}</b> - {{::comment.body}} <span class="pull-right">{{::comment.date}}</span>
             </li>
+
 
             <li class="list-group-item" ng-show="showAddComment(book)">
               <b>Add a comment</b>
@@ -65,6 +66,7 @@
                      ng-model="book.newComment.body">
             </li>
             <li class="list-group-item">
+              <hr ng-show="showComments">
                 <input ng-disabled="book.borrow"
                        type="text"
                        ng-show="!(showAddComment(book)) && !book.borrow"
