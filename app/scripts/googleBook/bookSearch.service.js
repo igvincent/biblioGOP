@@ -27,7 +27,7 @@ angular.module('biblioGopApp')
               thumbnail: data.items[0].volumeInfo.imageLinks.thumbnail,
               borrow : false,
               since : new Date().toLocaleDateString(),
-              borrower : null,
+              borrowers : [],
               comments : [],
               count: 0
             };

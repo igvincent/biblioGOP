@@ -1,5 +1,5 @@
 <div class="container">
-  <div ng-repeat="book in books" ng-init="showComments == false">
+  <div ng-repeat="book in books">
     <div class="panel" ng-class="{'panel-success': !book.borrow, 'panel-danger': book.borrow}">
       <div class="panel-heading">
         <a ng-click="delBook(book)" class="pull-right">
@@ -15,29 +15,29 @@
               <ul class="list-group">
                   <li class="list-group-item"
                       ng-show="book.authors">
-                      <b>Author(s) : </b><span ng-repeat="author in book.authors">{{author}}</span> &nbsp;
+                      <b>Author(s) : </b><span ng-repeat="author in book.authors">{{::book.author}}</span> &nbsp;
                   </li>
                   <li class="list-group-item"
                       ng-show="book.publisher">
                       <b>Publisher : </b>
-                      {{book.publisher}}
+                      {{::book.publisher}}
                   </li>
                   <li class="list-group-item"
                       ng-show="book.description">
                       <b>Description : </b>
-                      <span read-more hmtext="{{book.description}}"></span>
+                      <span read-more hmtext="{{::book.description}}"></span>
                   </li>
                   <li class="list-group-item"
                       ng-show="book.pageCount">
-                      <b>PageCount : </b>{{book.pageCount}}
+                      <b>PageCount : </b>{{::book.pageCount}}
                   </li>
                   <li class="list-group-item"
-                      ng-show="book.borrower">
-                      <b>Borrower : </b>{{book.borrower}} since {{book.since}}
+                      ng-show="book.borrow">
+                      <b>Borrower : </b>{{returnBorrower(book).name}} since {{returnBorrower(book).date}}
                   </li>
                   <li class="list-group-item"
-                      ng-show="!book.borrower">
-                      <b>Available : </b> since {{book.since}}
+                      ng-show="!book.borrow">
+                      <b>Available : </b> since {{returnBorrower(book).date}}
                   </li>
               </ul>
           </div>
@@ -53,16 +53,11 @@
             <li class="list-group-item"
                 ng-show="book.comments && showComments"
                 ng-repeat="comment in book.comments">
-              <b>{{comment.username}}</b> - {{comment.body}}
+              <b>{{::comment.username}}</b> - {{::comment.body}}
             </li>
 
             <li class="list-group-item" ng-show="showAddComment(book)">
               <b>Add a comment</b>
-              <input type="text"
-                     ng-keydown="addComment($event,book)"
-                     class="form-control"
-                     placeholder="Username"
-                     ng-model="book.newComment.username">
               <input type="text"
                      ng-keydown="addComment($event,book)"
                      class="form-control"
@@ -73,10 +68,10 @@
                 <input ng-disabled="book.borrow"
                        type="text"
                        ng-show="!(showAddComment(book)) && !book.borrow"
-                       ng-keydown="borrowBook($event,book)"
+                       ng-keydown="borrowBook($event,book,name)"
                        class="form-control"
-                       placeholder="Borrower username"
-                       ng-model="book.borrower">
+                       ng-model="name"
+                       placeholder="Borrower username">
                 <button ng-show="book.borrow"
                         class="pull-right btn btn-primary"
                         ng-click="returnBook(book)">Return book</button>
